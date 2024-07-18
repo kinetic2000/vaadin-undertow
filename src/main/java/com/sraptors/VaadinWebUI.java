@@ -1,6 +1,7 @@
 package com.sraptors;
 
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.annotation.WebInitParam;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -38,8 +39,12 @@ public class VaadinWebUI extends UI {
         
     }
 
-    @WebServlet(urlPatterns = "/*", name = "MyVaadinServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = VaadinWebUI.class, productionMode = false)
+    /*@WebServlet(urlPatterns = "/*", name = "MyVaadinServlet", asyncSupported = true)
+    @VaadinServletConfiguration(ui = VaadinWebUI.class, productionMode = false)*/
+    @WebServlet(value = "/*", asyncSupported = true, initParams = {
+        @WebInitParam(name = "ui", value = "com.example.MyUI"),
+        @WebInitParam(name = "productionMode", value = "false")
+      })
     public static class MyServlet extends VaadinServlet {
     }
 }
